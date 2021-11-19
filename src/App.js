@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import React, { useContext, useState } from 'react';
 import './App.css';
+import Header from './Ui/Header/Header';
+import Login from './Modules/Login/Login';
+import Main from "./Modules/Mcq/Quiz"
+import Menu from "./Modules/Mcq/Menu"
+import { GameStateContext } from "./Modules/helpers/Contexts";
+import EndScreen from "./Modules/Results/EndScreen";
 
-function App() {
-  return (
+import { AuthProvider, AuthContext } from './middlewares/AuthContext';
+function App ()
+{
+  const [ gameState, setGameState ] = useState( "menu" );
+  const [ userName, setUserName ] = useState( "" );
+  const [ score, setScore ] = useState( 0 );
+  const authContext = useContext( AuthContext );
+  return ( <><Header />
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+
+      { authContext.auth.email ?
+
+        <GameStateContext.Provider
+          value={ {
+            gameState,
+            setGameState,
+            userName,
+            setUserName,
+            score,
+            setScore,
+          } }
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+          { gameState === "menu" && <Menu /> }
+          { gameState === "playing" && <Main /> }
+          { gameState === "finished" && <EndScreen /> }
+        </GameStateContext.Provider> : <Login /> }
+    </div></>
   );
 }
-
-export default App;
+function AppWithStore ()
+{
+  return ( <AuthProvider>
+    <App />
+  </AuthProvider>
+  )
+}
+export default AppWithStore;

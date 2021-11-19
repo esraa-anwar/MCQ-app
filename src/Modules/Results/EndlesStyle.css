@@ -1,0 +1,34 @@
+.EndScreen {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  background-color: #22254b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#nextQuestion {
+  width: 200px;
+}
+
+h3 {
+  color: #ffffff;
+
+}
+.buttonTrue {
+  display: flex;
+  
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #000;
+  margin-bottom: 25px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
