@@ -4,7 +4,7 @@ import { GameStateContext } from "../helpers/Contexts";
 
 function Menu ()
 {
-  const { gameState, setGameState, userName, setUserName } = useContext(
+  const { setGameState, setUserName } = useContext(
     GameStateContext
   );
   return (
